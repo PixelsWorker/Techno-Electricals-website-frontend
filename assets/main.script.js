@@ -2,8 +2,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const darkModeToggle = document.getElementById("darkModeToggle");
     const body = document.body;
     const serviceIcons = document.querySelectorAll(".service-icon");
+    const backToTopButton = document.getElementById("backToTop");
+    const preloader = document.getElementById("preloader");
+    const heroSection = document.querySelector(".hero");
+    const customerLogos = document.querySelectorAll(".customer-logo");
+    const carousel = document.getElementById("customerCarousel");
 
-    // Define light and dark mode images
+    // Icon mappings for light/dark mode
     const iconMappings = {
         "transformer_light.webp": "transformer_dark.webp",
         "tools_light.webp": "tools_dark.webp",
@@ -12,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateIcons() {
         serviceIcons.forEach(icon => {
-            const fileName = new URL(icon.src).pathname.split('/').pop(); // Get file name reliably
+            const fileName = icon.src.split('/').pop(); // Get file name reliably
             if (body.classList.contains("dark-mode")) {
                 if (iconMappings[fileName]) {
                     icon.src = `../images/icon/${iconMappings[fileName]}`;
@@ -29,44 +34,34 @@ document.addEventListener("DOMContentLoaded", function () {
     function enableDarkMode() {
         body.classList.add("dark-mode");
         localStorage.setItem("darkMode", "enabled");
-        darkModeToggle.textContent = "☀️"; 
+        darkModeToggle.textContent = "☀️";
         updateIcons();
     }
 
     function disableDarkMode() {
         body.classList.remove("dark-mode");
         localStorage.setItem("darkMode", "disabled");
-        darkModeToggle.textContent = "🌙"; 
+        darkModeToggle.textContent = "🌙";
         updateIcons();
     }
 
     // Apply stored dark mode preference
-    if (localStorage.getItem("darkMode") === "enabled") {
-        enableDarkMode();
-    }
+    if (localStorage.getItem("darkMode") === "enabled") enableDarkMode();
 
     // Toggle dark mode on button click
-    darkModeToggle.addEventListener("click", function () {
-        if (body.classList.contains("dark-mode")) {
-            disableDarkMode();
-        } else {
-            enableDarkMode();
-        }
+    darkModeToggle.addEventListener("click", () => {
+        body.classList.contains("dark-mode") ? disableDarkMode() : enableDarkMode();
     });
 
     // Smooth scrolling for navbar links
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-
+    document.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", function (e) {
+            const href = this.getAttribute("href");
             if (href.startsWith("#")) {
                 e.preventDefault();
                 const targetElement = document.getElementById(href.substring(1));
                 if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: targetElement.offsetTop - 70, behavior: "smooth" });
                 }
             }
         });
@@ -74,20 +69,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Hide Preloader
     function hidePreloader() {
-        setTimeout(() => {
-            document.getElementById('preloader').classList.add('fade-out');
-        }, 1000);
+        if (preloader) {
+            preloader.style.opacity = "0"; // Fade out effect
+            setTimeout(() => preloader.style.display = "none", 500);
+        }
     }
+    hidePreloader();
 
     // Hero Background Slideshow
-    const heroSection = document.querySelector('.hero');
     const images = [
         "images/BackgroundImg/BackgroundImg_1.webp",
-        "images/BackgroundImg/BackgroundImg_2.webp",    
+        "images/BackgroundImg/BackgroundImg_2.webp",
         "images/BackgroundImg/BackgroundImg_3.webp"
     ];
     let currentIndex = 0;
-
+    
     function changeBackground() {
         heroSection.style.background = `url('${images[currentIndex]}') no-repeat center center/cover`;
         currentIndex = (currentIndex + 1) % images.length;
@@ -96,88 +92,26 @@ document.addEventListener("DOMContentLoaded", function () {
     changeBackground();
     setInterval(changeBackground, 5000); // Change every 5 seconds
 
-    // Scroll to Top Button
-    const backToTopButton = document.getElementById("backToTop");
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 200) {
-            backToTopButton.style.display = "flex";
-        } else {
-            backToTopButton.style.display = "none";
-        }
+    // Back to Top Button
+    window.addEventListener("scroll", () => {
+        backToTopButton.style.display = window.scrollY > 200 ? "flex" : "none";
     });
 
-    backToTopButton.addEventListener("click", function () {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    });
-});
-
-
-
-// Back to Top Button
-
-document.addEventListener("DOMContentLoaded", function () {
-    const backToTopButton = document.getElementById("backToTop");
-
-    // Show button when scrolling down
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 300) {
-            backToTopButton.style.display = "flex";
-        } else {
-            backToTopButton.style.display = "none";
-        }
+    backToTopButton.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Scroll to top when clicked
-    backToTopButton.addEventListener("click", function () {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    function hidePreloader() {
-        const preloader = document.getElementById("preloader");
-        if (preloader) {
-            preloader.style.opacity = "0"; // Fade out effect
-            setTimeout(() => {
-                preloader.style.display = "none"; // Remove from DOM after fade-out
-            }, 500);
-        }
-    }
-
-    // Call hidePreloader() after page load
-    hidePreloader();
-});
-
-
-// Valued Customers Carousel
-document.addEventListener("DOMContentLoaded", function () {
-    const carousel = document.getElementById("customerCarousel");
-
+    // Valued Customers Carousel
     if (carousel) {
-        const interval = 2000; // Change slide every 3 seconds
-        const bootstrapCarousel = new bootstrap.Carousel(carousel, {
-            interval: interval,
-            pause: "hover", // Pause on hover
-            wrap: true // Loop slides
-        });
+        new bootstrap.Carousel(carousel, { interval: 2000, pause: "hover", wrap: true });
     }
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-    const customerLogos = document.querySelectorAll(".customer-logo");
-
+    // Customer Logo Click Handling
     customerLogos.forEach(logo => {
         logo.addEventListener("click", function () {
             const websiteUrl = this.getAttribute("data-url");
             if (websiteUrl) {
-                const userConfirmed = confirm(`Do you want to visit ${this.alt}?`);
-                if (userConfirmed) {
+                if (confirm(`Do you want to visit ${this.alt}?`)) {
                     window.open(websiteUrl, "_blank"); // Open in a new tab
                 }
             }
