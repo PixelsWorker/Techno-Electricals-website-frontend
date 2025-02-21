@@ -82,9 +82,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // Hero Background Slideshow
     const heroSection = document.querySelector('.hero');
     const images = [
-        "../images/BackgroundImg/BackgroundImg_1.webp",
-        "../images/BackgroundImg/BackgroundImg_2.webp",    
-        "../images/BackgroundImg/BackgroundImg_3.webp"
+        "images/BackgroundImg/BackgroundImg_1.webp",
+        "images/BackgroundImg/BackgroundImg_2.webp",    
+        "images/BackgroundImg/BackgroundImg_3.webp"
     ];
     let currentIndex = 0;
 
