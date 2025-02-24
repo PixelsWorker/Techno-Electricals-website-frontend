@@ -13,7 +13,7 @@ const contactApp = Vue.createApp({
     },
     methods: {
         submitForm() {
-            axios.post('http://127.0.0.1:8000/api/contact/', this.form)
+            axios.post('https://source-production-b2bb.up.railway.app/api/contact/', this.form)
                 .then(response => {
                     this.successMessage = "Message sent successfully!";
                     this.errorMessage = "";
