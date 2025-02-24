@@ -52,28 +52,57 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section bg-light py-5" data-aos="fade-up">
-        <div class="container">
-            <h2 class="text-center">Contact Us</h2>
-            <div class="row">
-                <div class="col-md-6 text-center contact-box">
-                    <h3>Techno Electricals</h3>
-                    <p><strong>Address:</strong> NH-37, Tetelia, near Italian World, P. O, Jalukbari, Guwahati, Assam 781011</p>
-                    <p><i class="fas fa-phone-alt"></i> <a href="tel:+919085774009">+91 9085774009</a></p>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:technoelectricalsghy@gmail.com">technoelectricalsghy@gmail.com</a></p>
-                    <div style="width: 100%"><iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=250&amp;hl=en&amp;q=Techno%20Electricals,%20Tetelia,%20near%20stone%20india,%20P.%20O,%20Jalukbari,%20Guwahati,%20Assam%20781014+(Techno%20Electricals)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">real-time gps tracking</a></iframe></div>
+<!-- Contact Section -->
+<section id="contact" class="container py-5">
+    <h2 class="text-center">Contact Us</h2>
+    <div id="contactApp" class="row justify-content-center">
+        <div class="col-md-6">
+            <form @submit.prevent="submitForm">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" v-model="form.name" required>
                 </div>
-                <div class="col-md-6 text-center contact-box">
-                    <h3>Techno Electricals Unit-II</h3>
-                    <p><strong>Address:</strong> Garchuk - Pamohi Rd, Pamohi, Guwahati, Assam 781035</p>
-                    <p><i class="fas fa-phone-alt"></i> <a href="tel:+919954826260">+91 9954826260</a></p>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:technoelectricalsunit2ghy@gmail.com">technoelectricalsunit2ghy@gmail.com</a></p>
-                    <div style="width: 100%"><iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=+(Techno%20Electricals%20Unit-II)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">real-time gps tracking</a></iframe></div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" v-model="form.email" required>
                 </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="tel" class="form-control" id="phone" v-model="form.phone" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="4" v-model="form.message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+                <p v-if="successMessage" class="mt-3 text-success">{{ successMessage }}</p>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="contact-section bg-light py-5" data-aos="fade-up">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center contact-box">
+                <h3>Techno Electricals</h3>
+                <p><strong>Address:</strong> NH-37, Tetelia, near Italian World, P. O, Jalukbari, Guwahati, Assam 781011</p>
+                <p><i class="fas fa-phone-alt"></i> <a href="tel:+919085774009">+91 9085774009</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:technoelectricalsghy@gmail.com">technoelectricalsghy@gmail.com</a></p>
+                <div style="width: 100%"><iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=250&amp;hl=en&amp;q=Techno%20Electricals,%20Tetelia,%20near%20stone%20india,%20P.%20O,%20Jalukbari,%20Guwahati,%20Assam%20781014+(Techno%20Electricals)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">real-time gps tracking</a></iframe></div>
+            </div>
+            <div class="col-md-6 text-center contact-box">
+                <h3>Techno Electricals Unit-II</h3>
+                <p><strong>Address:</strong> Garchuk - Pamohi Rd, Pamohi, Guwahati, Assam 781035</p>
+                <p><i class="fas fa-phone-alt"></i> <a href="tel:+919954826260">+91 9954826260</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:technoelectricalsunit2ghy@gmail.com">technoelectricalsunit2ghy@gmail.com</a></p>
+                <div style="width: 100%"><iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=+(Techno%20Electricals%20Unit-II)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">real-time gps tracking</a></iframe></div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3">

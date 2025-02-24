@@ -4,9 +4,11 @@ const contactApp = Vue.createApp({
             form: {
                 name: "",
                 email: "",
+                phone_number: "", // Phone number added
                 message: ""
             },
-            successMessage: ""
+            successMessage: "",
+            errorMessage: ""
         };
     },
     methods: {
@@ -14,9 +16,13 @@ const contactApp = Vue.createApp({
             axios.post('http://127.0.0.1:8000/api/contact/', this.form)
                 .then(response => {
                     this.successMessage = "Message sent successfully!";
-                    this.form = { name: "", email: "", message: "" }; // Clear form
+                    this.errorMessage = "";
+                    this.form = { name: "", email: "", phone_number: "", message: "" }; // Clear form
                 })
-                .catch(error => console.error("Error submitting form:", error));
+                .catch(error => {
+                    this.errorMessage = "Error submitting form. Please try again.";
+                    console.error("Error submitting form:", error);
+                });
         }
     }
 });
