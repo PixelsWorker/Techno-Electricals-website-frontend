@@ -5,7 +5,7 @@ const galleryApp = Vue.createApp({
         };
     },
     mounted() {
-        axios.get('http://127.0.0.1:8000/api/gallery/') // Fetch images from Django API
+        axios.get('https://source-production-b2bb.up.railway.app/api/gallery/') // Fetch images from Django API
             .then(response => {
                 this.images = response.data.map(image => {
                     let fileId = "";
